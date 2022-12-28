@@ -148,7 +148,7 @@ impl VerifyingKey {
         bits[31] &= 127;
         bits[31] |= 64;
 
-        let point = &Scalar::from_bits(*bits) * &constants::ED25519_BASEPOINT_TABLE;
+        let point = &Scalar::from_bits(*bits) * constants::ED25519_BASEPOINT_TABLE;
         let compressed = point.compress();
 
         VerifyingKey(compressed, point)

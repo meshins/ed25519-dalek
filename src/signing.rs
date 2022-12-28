@@ -706,7 +706,7 @@ impl ExpandedSecretKey {
         h.update(message);
 
         let r = Scalar::from_hash(h);
-        let R: CompressedEdwardsY = (&r * &ED25519_BASEPOINT_TABLE).compress();
+        let R: CompressedEdwardsY = (&r * ED25519_BASEPOINT_TABLE).compress();
 
         h = Sha512::new();
         h.update(R.as_bytes());
@@ -784,7 +784,7 @@ impl ExpandedSecretKey {
             .chain_update(&prehash[..]);
 
         let r = Scalar::from_hash(h);
-        let R: CompressedEdwardsY = (&r * &ED25519_BASEPOINT_TABLE).compress();
+        let R: CompressedEdwardsY = (&r * ED25519_BASEPOINT_TABLE).compress();
 
         h = Sha512::new()
             .chain_update(b"SigEd25519 no Ed25519 collisions")
