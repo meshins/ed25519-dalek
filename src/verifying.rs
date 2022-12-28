@@ -12,7 +12,6 @@
 use core::convert::TryFrom;
 use core::fmt::Debug;
 
-use curve25519_dalek::constants;
 use curve25519_dalek::digest::generic_array::typenum::U64;
 use curve25519_dalek::digest::Digest;
 use curve25519_dalek::edwards::CompressedEdwardsY;
@@ -20,6 +19,8 @@ use curve25519_dalek::edwards::EdwardsPoint;
 use curve25519_dalek::scalar::Scalar;
 
 use ed25519::signature::Verifier;
+
+use crate::mul_base::mul_base;
 
 pub use sha2::Sha512;
 
@@ -148,7 +149,7 @@ impl VerifyingKey {
         bits[31] &= 127;
         bits[31] |= 64;
 
-        let point = &Scalar::from_bits(*bits) * constants::ED25519_BASEPOINT_TABLE;
+        let point = mul_base(&Scalar::from_bits(*bits));
         let compressed = point.compress();
 
         VerifyingKey(compressed, point)

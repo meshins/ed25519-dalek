@@ -26,8 +26,11 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - run: rustup target add ${{ matrix.target }}
       - run: ${{ matrix.deps }}
-      - run: cargo test --target ${{ matrix.target }} --no-default-features --lib
+      - run: cargo test --target ${{ matrix.target }} --no-default-features --lib --tests
       - run: cargo test --target ${{ matrix.target }} --no-default-features --features alloc --lib
+      - run: cargo test --target ${{ matrix.target }} --no-default-features --features basepoint-tables --lib
+      - run: cargo test --target ${{ matrix.target }} --no-default-features --features rand --lib --tests
+      - run: cargo test --target ${{ matrix.target }} --no-default-features --features basepoint-tables,rand --lib --tests
       - run: cargo test --target ${{ matrix.target }}
       - run: cargo test --target ${{ matrix.target }} --features batch
       - run: cargo test --target ${{ matrix.target }} --features batch_deterministic
