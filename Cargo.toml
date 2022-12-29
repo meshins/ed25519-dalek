@@ -50,7 +50,7 @@ harness = false
 required-features = ["batch"]
 
 [features]
-default = ["basepoint-tables", "std", "rand"]
+default = ["fast", "rand", "std"]
 alloc = ["curve25519-dalek/alloc", "ed25519/alloc", "rand?/alloc", "serde?/alloc", "zeroize/alloc"]
 std = ["alloc", "ed25519/std", "rand?/std", "serde?/std", "sha2/std"]
 
@@ -58,7 +58,7 @@ asm = ["sha2/asm"]
 batch = ["alloc", "merlin", "rand/std"]
 # This feature enables deterministic batch verification.
 batch_deterministic = ["alloc", "merlin", "rand"]
-basepoint-tables = ["curve25519-dalek/basepoint-tables"]
+fast = ["curve25519-dalek/basepoint-tables"]
 # This features turns off stricter checking for scalar malleability in signatures
 legacy_compatibility = []
 pkcs8 = ["ed25519/pkcs8"]

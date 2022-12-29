@@ -10,14 +10,15 @@ use curve25519_dalek::scalar::Scalar;
 
 /// Fixed-base scalar multiplication by the Ed25519 base point.
 ///
-/// Uses basepoint tables when the `basepoint-tables` feature is enabled.
+/// Uses precomputed basepoint tables when the `fast` feature is enabled,
+/// trading off increased code size for better performance.
 pub(crate) fn mul_base(scalar: &Scalar) -> EdwardsPoint {
-    #[cfg(not(feature = "basepoint-tables"))]
+    #[cfg(not(feature = "fast"))]
     {
         scalar * constants::ED25519_BASEPOINT_POINT
     }
 
-    #[cfg(feature = "basepoint-tables")]
+    #[cfg(feature = "fast")]
     {
         scalar * constants::ED25519_BASEPOINT_TABLE
     }
